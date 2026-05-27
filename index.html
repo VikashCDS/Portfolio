@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vikash Kumar Singh | AI Engineer & Data Scientist</title>
+    <meta name="description" content="AI Engineer & Data Scientist specializing in LLM pipelines, RAG architectures, and end-to-end ML systems.">
+    <link rel="stylesheet" href="style.css">
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<!-- ============ NEURAL NETWORK CANVAS BACKGROUND ============ -->
+<canvas id="neural-bg"></canvas>
+
+<!-- ============ DOWNLOAD NOTIFICATION ============ -->
+<div id="dl-toast" class="dl-toast" aria-live="polite">
+    <i class='bx bx-download'></i>
+    <span id="dl-toast-msg">Someone just downloaded your resume!</span>
+    <button onclick="document.getElementById('dl-toast').classList.remove('show')" aria-label="Close">×</button>
+</div>
+
+<!-- ============ HEADER ============ -->
+<header class="header" id="header">
+    <a href="#home" class="logo"><span class="logo-bracket">&lt;</span>VKS<span class="logo-bracket">/&gt;</span></a>
+    <div class="bx bx-menu" id="menu-icon"></div>
+    <nav class="navbar" id="navbar">
+        <a href="#home" class="active">Home</a>
+        <a href="#about">About</a>
+        <a href="#experience">Experience</a>
+        <a href="#projects">Projects</a>
+        <a href="#skills">Skills</a>
+        <a href="#education">Education</a>
+        <a href="#contact">Contact</a>
+        <a href="Vikash_Analyst(1).pdf" download="Vikash_Analyst(1).pdf" id="nav-resume-btn" class="nav-dl-btn" onclick="trackDownload('nav')">
+            <i class='bx bx-download'></i> Resume
+        </a>
+    </nav>
+</header>
+
+<!-- ============ HOME ============ -->
+<section class="home" id="home">
+    <div class="home-content">
+        <div class="greeting-badge"><span class="dot-pulse"></span> Available for Opportunities</div>
+        <h1>Hi, I'm <span class="name-highlight">Vikash Kumar Singh</span></h1>
+        <div class="typewriter-wrap">
+            <span class="tw-prefix">I build </span>
+            <span class="typewriter" id="typewriter"></span>
+        </div>
+        <p class="hero-desc">
+            AI Engineer and Data Scientist with hands-on experience in LLM pipelines, RAG architectures, 
+            and end-to-end ML systems. Turning complex data problems into measurable business impact.
+        </p>
+        <div class="hero-stats">
+            <div class="stat-pill"><span>15%</span> Model accuracy boost</div>
+            <div class="stat-pill"><span>40%</span> Data augmentation</div>
+            <div class="stat-pill"><span>90%+</span> NLP accuracy</div>
+        </div>
+        <div class="btn-box">
+            <a href="#projects" class="btn btn-primary"><i class='bx bx-code-block'></i> View Projects</a>
+            <a href="Vikash_Analyst(1).pdf" download="Vikash_Analyst(1).pdf" class="btn btn-outline" id="hero-dl-btn" onclick="trackDownload('hero')">
+                <i class='bx bx-download'></i> Download Resume
+            </a>
+            <a href="#contact" class="btn btn-ghost">Let's Talk</a>
+        </div>
+        <div class="home-sci">
+            <a href="https://www.linkedin.com/in/vikash-kumar-singh-39012318b" target="_blank" aria-label="LinkedIn"><i class='bx bxl-linkedin'></i></a>
+            <a href="https://github.com/VikashCDS" target="_blank" aria-label="GitHub"><i class='bx bxl-github'></i></a>
+            <a href="https://www.facebook.com/share/1MQ6RWiDUW/" target="_blank" aria-label="Facebook"><i class='bx bxl-facebook'></i></a>
+            <a href="mailto:vks8405074264@gmail.com" aria-label="Email"><i class='bx bx-envelope'></i></a>
+        </div>
+    </div>
+
+    <div class="home-img" id="heroImg">
+        <div class="orbit orbit-1"></div>
+        <div class="orbit orbit-2"></div>
+        <div class="orbit orbit-3"></div>
+        <div class="orbit-dot od-1"><i class='bx bx-brain'></i></div>
+        <div class="orbit-dot od-2"><i class='bx bxl-python'></i></div>
+        <div class="orbit-dot od-3"><i class='bx bx-data'></i></div>
+        <div class="orbit-dot od-4"><i class='bx bx-chip'></i></div>
+        <div class="photo-ring"></div>
+        <div class="photo-wrap">
+            <img src="Vikash.jpg" alt="Vikash Kumar Singh" id="hero-photo">
+            <div class="photo-glow"></div>
+        </div>
+        <div class="floating-badge fb-1"><i class='bx bx-bot'></i> AI Engineer</div>
+        <div class="floating-badge fb-2"><i class='bx bx-bar-chart-alt-2'></i> Data Scientist</div>
+        <div class="floating-badge fb-3"><i class='bx bx-code-alt'></i> LLM / RAG</div>
+    </div>
+</section>
+
+<!-- ============ ABOUT ============ -->
+<section class="about" id="about">
+    <div class="section-tag">01 / About</div>
+    <h2 class="heading">About <span>Me</span></h2>
+    <div class="about-grid">
+        <div class="about-img-wrap">
+            <div class="about-photo-frame">
+                <img src="Vikash.jpg" alt="Vikash Kumar Singh">
+                <div class="frame-corner fc-tl"></div>
+                <div class="frame-corner fc-tr"></div>
+                <div class="frame-corner fc-bl"></div>
+                <div class="frame-corner fc-br"></div>
+            </div>
+        </div>
+        <div class="about-content">
+            <h3>AI Engineer &amp; <span>Data Scientist</span></h3>
+            <p>
+                I'm a passionate AI Engineer and Data Scientist based in Bengaluru, India, with deep expertise in 
+                building LLM-powered pipelines, RAG architectures, and end-to-end ML systems. My toolkit spans 
+                LangChain, Python, TensorFlow, Scikit-learn, and Vector Databases, and I thrive at translating 
+                complex business problems into scalable, data-driven solutions.
+            </p>
+            <p>
+                Currently open to exciting opportunities in AI/ML engineering, data science, and GenAI product 
+                development. I believe great AI is built at the intersection of strong mathematics, clean engineering, 
+                and deep domain understanding.
+            </p>
+            <div class="about-highlights">
+                <div class="highlight-card">
+                    <i class='bx bx-map-pin'></i>
+                    <div><strong>Location</strong><span>Bengaluru, India</span></div>
+                </div>
+                <div class="highlight-card">
+                    <i class='bx bx-graduation'></i>
+                    <div><strong>Degree</strong><span>B.Tech CSBS – 8.2 CGPA</span></div>
+                </div>
+                <div class="highlight-card">
+                    <i class='bx bx-trophy'></i>
+                    <div><strong>Award</strong><span>Best Outgoing Student</span></div>
+                </div>
+                <div class="highlight-card">
+                    <i class='bx bx-certification'></i>
+                    <div><strong>Certified</strong><span>NASSCOM · IABAC · DataMites</span></div>
+                </div>
+            </div>
+            <div class="btn-box">
+                <a href="Vikash_Analyst(1).pdf" download="Vikash_Analyst(1).pdf" class="btn btn-primary" onclick="trackDownload('about')">
+                    <i class='bx bx-download'></i> Download Resume
+                </a>
+                <a href="#contact" class="btn btn-outline">Hire Me</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ============ EXPERIENCE ============ -->
+<section class="experience" id="experience">
+    <div class="section-tag">02 / Experience</div>
+    <h2 class="heading">Work <span>Experience</span></h2>
+    <div class="timeline">
+
+        <div class="timeline-item" data-aos>
+            <div class="timeline-dot"><i class='bx bx-bot'></i></div>
+            <div class="timeline-card">
+                <div class="tc-header">
+                    <div>
+                        <h3>AI Engineer / Data Science Consultant</h3>
+                        <p class="tc-company"><i class='bx bx-buildings'></i> Rubixe AI Solutions</p>
+                        <p class="tc-meta"><i class='bx bx-map-pin'></i> Bengaluru, Karnataka, India</p>
+                    </div>
+                    <span class="tc-date">Sep 2025 – Mar 2026</span>
+                </div>
+                <ul class="tc-bullets">
+                    <li>Designed and developed LLM-powered pipelines using <span>LangChain</span> and <span>Ollama</span>, integrating RAG architectures to build context-aware, domain-specific AI applications.</li>
+                    <li>Built and deployed end-to-end ML models (Scikit-learn, TensorFlow) with hyperparameter optimization via Keras Tuner, improving model generalization and accuracy by <span>15%</span>.</li>
+                    <li>Performed EDA, feature engineering, and statistical modeling on large datasets to extract actionable insights for business decision-making.</li>
+                    <li>Collaborated with cross-functional teams to deploy scalable AI/ML solutions; applied data augmentation to boost dataset size by <span>40%</span> and improve model robustness.</li>
+                </ul>
+                <div class="tc-tags">
+                    <span>LangChain</span><span>Ollama</span><span>RAG</span><span>TensorFlow</span><span>Keras Tuner</span><span>EDA</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="timeline-item" data-aos>
+            <div class="timeline-dot"><i class='bx bx-group'></i></div>
+            <div class="timeline-card">
+                <div class="tc-header">
+                    <div>
+                        <h3>Student Coordinator</h3>
+                        <p class="tc-company"><i class='bx bx-buildings'></i> Excel Engineering College</p>
+                        <p class="tc-meta"><i class='bx bx-map-pin'></i> Tamil Nadu, India</p>
+                    </div>
+                    <span class="tc-date">May 2024 – Apr 2025</span>
+                </div>
+                <ul class="tc-bullets">
+                    <li>Organized <span>10+</span> technical events driving a <span>40% increase</span> in participation.</li>
+                    <li>Managed and mentored <span>50+ students</span> through structured planning and stakeholder coordination.</li>
+                </ul>
+                <div class="tc-tags">
+                    <span>Leadership</span><span>Event Management</span><span>Mentoring</span><span>Stakeholder Mgmt</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="timeline-item" data-aos>
+            <div class="timeline-dot"><i class='bx bxl-python'></i></div>
+            <div class="timeline-card">
+                <div class="tc-header">
+                    <div>
+                        <h3>Python Intern</h3>
+                        <p class="tc-company"><i class='bx bx-buildings'></i> SSS Enterprises Pvt. Ltd.</p>
+                    </div>
+                    <span class="tc-date">May 2023 – Jun 2023</span>
+                </div>
+                <ul class="tc-bullets">
+                    <li>Worked on a mini project under supervision and explored new opportunities in Python development.</li>
+                </ul>
+                <div class="tc-tags"><span>Python</span></div>
+            </div>
+        </div>
+
+        <div class="timeline-item" data-aos>
+            <div class="timeline-dot"><i class='bx bx-globe'></i></div>
+            <div class="timeline-card">
+                <div class="tc-header">
+                    <div>
+                        <h3>Web Development Intern</h3>
+                        <p class="tc-company"><i class='bx bx-buildings'></i> Skill Vertex</p>
+                    </div>
+                    <span class="tc-date">Mar 2022 – Apr 2022</span>
+                </div>
+                <ul class="tc-bullets">
+                    <li>Learned to design web pages and improved team leadership through soft-skills training.</li>
+                </ul>
+                <div class="tc-tags"><span>Web Development</span><span>HTML</span><span>CSS</span></div>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<!-- ============ PROJECTS ============ -->
+<section class="projects" id="projects">
+    <div class="section-tag">03 / Projects</div>
+    <h2 class="heading">Featured <span>Projects</span></h2>
+    <div class="projects-grid">
+
+        <div class="project-card featured" data-aos>
+            <div class="pc-accent"></div>
+            <div class="pc-icon"><i class='bx bx-chat'></i></div>
+            <div class="pc-category">GenAI · NLP</div>
+            <h3>RAG-Based Document QA System</h3>
+            <p>Built a Retrieval-Augmented Generation pipeline using LangChain and Ollama (local LLM) to enable intelligent document Q&A over custom knowledge bases. Integrated ChromaDB with Hugging Face embeddings for semantic retrieval; significantly reduced hallucination by grounding responses in retrieved context.</p>
+            <div class="pc-tags">
+                <span>LangChain</span><span>Ollama</span><span>RAG</span><span>ChromaDB</span><span>Hugging Face</span><span>Python</span>
+            </div>
+            <a href="https://github.com/VikashCDS/RAG-Based-Question-Answering-System" target="_blank" class="pc-link"><i class='bx bxl-github'></i> View on GitHub</a>
+        </div>
+
+        <div class="project-card" data-aos>
+            <div class="pc-accent"></div>
+            <div class="pc-icon"><i class='bx bx-analyse'></i></div>
+            <div class="pc-category">NLP · Deep Learning</div>
+            <h3>Multi-Task NLP Classifier</h3>
+            <p>Developed a multi-task NLP model for emotion, hate speech, and violence classification achieving <strong>90%+ accuracy</strong> and reducing inference time by 30%. Evaluated with precision, recall, and F1-score.</p>
+            <div class="pc-tags">
+                <span>Python</span><span>Scikit-learn</span><span>BERT</span><span>TF-IDF</span><span>Word Embeddings</span>
+            </div>
+            <a href="https://github.com/VikashCDS/Multi-Task-NLP-Content-Classifier" target="_blank" class="pc-link"><i class='bx bxl-github'></i> View on GitHub</a>
+        </div>
+
+        <div class="project-card" data-aos>
+            <div class="pc-accent"></div>
+            <div class="pc-icon"><i class='bx bx-trending-up'></i></div>
+            <div class="pc-category">ML · FinTech</div>
+            <h3>Credit Risk Prediction</h3>
+            <p>Built a credit risk ML model achieving <strong>0.87 ROC-AUC</strong> on imbalanced datasets. Performed EDA, data cleaning, and feature engineering improving performance by 15%. Validated with A/B testing.</p>
+            <div class="pc-tags">
+                <span>Python</span><span>Pandas</span><span>Scikit-learn</span><span>ROC-AUC</span><span>A/B Testing</span>
+            </div>
+            <a href="https://github.com/VikashCDS/Bank-GoodCredit" target="_blank" class="pc-link"><i class='bx bxl-github'></i> View on GitHub</a>
+        </div>
+
+        <div class="project-card" data-aos>
+            <div class="pc-accent"></div>
+            <div class="pc-icon"><i class='bx bx-camera'></i></div>
+            <div class="pc-category">Computer Vision · HCI</div>
+            <h3>Gesture Volume Control</h3>
+            <p>Developed a real-time hand gesture-based volume control system using MediaPipe for 21-point hand landmark detection and OpenCV for live webcam feed. Mapped finger distance to system volume via Pycaw and NumPy interpolation.</p>
+            <div class="pc-tags">
+                <span>Python</span><span>MediaPipe</span><span>OpenCV</span><span>Pycaw</span><span>NumPy</span>
+            </div>
+            <a href="https://github.com/VikashCDS/Gesture-Volume-Control" target="_blank" class="pc-link"><i class='bx bxl-github'></i> View on GitHub</a>
+        </div>
+
+    </div>
+</section>
+
+<!-- ============ SKILLS ============ -->
+<section class="skills" id="skills">
+    <div class="section-tag">04 / Skills</div>
+    <h2 class="heading">Tech <span>Stack</span></h2>
+    <div class="skills-universe">
+
+        <div class="skill-group">
+            <h3 class="sg-title"><i class='bx bx-bot'></i> Generative AI &amp; LLMs</h3>
+            <div class="skill-chips">
+                <span>LangChain</span><span>Ollama</span><span>RAG</span><span>LLM Fine-tuning</span>
+                <span>Prompt Engineering</span><span>Hugging Face</span><span>BERT</span><span>Transformers</span>
+                <span>ChromaDB</span><span>FAISS</span><span>FastAPI</span>
+            </div>
+        </div>
+
+        <div class="skill-group">
+            <h3 class="sg-title"><i class='bx bx-brain'></i> ML &amp; Deep Learning</h3>
+            <div class="skill-chips">
+                <span>Scikit-learn</span><span>TensorFlow</span><span>Keras</span><span>XGBoost</span>
+                <span>CNN</span><span>ANN</span><span>RNN</span><span>LSTM</span>
+                <span>Decision Tree</span><span>SVM</span><span>PCA</span>
+                <span>Hyperparameter Tuning</span><span>Transfer Learning</span><span>Streamlit</span>
+            </div>
+        </div>
+
+        <div class="skill-group">
+            <h3 class="sg-title"><i class='bx bx-text'></i> NLP &amp; Computer Vision</h3>
+            <div class="skill-chips">
+                <span>NLP</span><span>TF-IDF</span><span>Word Embeddings</span>
+                <span>Object Detection</span><span>Image Preprocessing</span><span>Data Augmentation</span>
+                <span>OpenCV</span><span>MediaPipe</span>
+            </div>
+        </div>
+
+        <div class="skill-group">
+            <h3 class="sg-title"><i class='bx bxl-python'></i> Programming &amp; Data</h3>
+            <div class="skill-chips">
+                <span>Python</span><span>SQL</span><span>NoSQL</span><span>Pandas</span>
+                <span>NumPy</span><span>Matplotlib</span><span>Seaborn</span>
+                <span>EDA</span><span>Feature Engineering</span><span>Statistical Modeling</span><span>Hypothesis Testing</span>
+            </div>
+        </div>
+
+        <div class="skill-group">
+            <h3 class="sg-title"><i class='bx bx-wrench'></i> Tools &amp; Platforms</h3>
+            <div class="skill-chips">
+                <span>Git</span><span>Jupyter Notebook</span><span>Google Colab</span>
+                <span>MySQL</span><span>MongoDB</span><span>Power BI</span><span>Tableau</span>
+                <span>Model Deployment</span>
+            </div>
+        </div>
+
+        <div class="skill-group">
+            <h3 class="sg-title"><i class='bx bx-group'></i> Soft Skills</h3>
+            <div class="skill-chips soft">
+                <span>Cross-functional Collaboration</span><span>Stakeholder Management</span>
+                <span>Project Management</span><span>Problem-Solving</span>
+                <span>Analytical Thinking</span><span>Data Storytelling</span>
+                <span>Adaptability</span><span>Self-driven Learning</span>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<!-- ============ EDUCATION ============ -->
+<section class="education" id="education">
+    <div class="section-tag">05 / Education</div>
+    <h2 class="heading">Education &amp; <span>Certifications</span></h2>
+
+    <div class="edu-grid">
+        <div class="edu-card" data-aos>
+            <div class="edu-icon"><i class='bx bx-graduation'></i></div>
+            <div class="edu-body">
+                <span class="edu-date">Dec 2021 – May 2025</span>
+                <h3>B.Tech in Computer Science &amp; Business Systems</h3>
+                <p class="edu-inst">Anna University – Excel Engineering College, Tamil Nadu</p>
+                <p class="edu-detail">CGPA: <strong>8.2</strong> · Honors: <strong>Best Outgoing Student Award</strong></p>
+            </div>
+        </div>
+        <div class="edu-card" data-aos>
+            <div class="edu-icon"><i class='bx bx-book-open'></i></div>
+            <div class="edu-body">
+                <span class="edu-date">2018–2020</span>
+                <h3>12<sup>th</sup> Standard — PCM</h3>
+                <p class="edu-inst">Central Board Of Secondary Education</p>
+                <p class="edu-detail">65% in Physics, Chemistry &amp; Mathematics</p>
+            </div>
+        </div>
+        <div class="edu-card" data-aos>
+            <div class="edu-icon"><i class='bx bx-book'></i></div>
+            <div class="edu-body">
+                <span class="edu-date">2017–2018</span>
+                <h3>10<sup>th</sup> Standard</h3>
+                <p class="edu-inst">Central Board Of Secondary Education</p>
+                <p class="edu-detail">CGPA: <strong>7.0</strong></p>
+            </div>
+        </div>
+    </div>
+
+    <h3 class="cert-heading"><i class='bx bx-certification'></i> Certifications</h3>
+    <div class="cert-row">
+        <div class="cert-card"><i class='bx bx-badge-check'></i> Certified Data Scientist<span>NASSCOM</span></div>
+        <div class="cert-card"><i class='bx bx-badge-check'></i> Certified Data Scientist<span>IABAC</span></div>
+        <div class="cert-card"><i class='bx bx-badge-check'></i> Data Science &amp; ML<span>DataMites</span></div>
+    </div>
+</section>
+
+<!-- ============ RESUME SECTION ============ -->
+<section class="resume-section" id="resume">
+    <div class="section-tag">06 / Resume</div>
+    <h2 class="heading">My <span>Resume</span></h2>
+    <div class="resume-card">
+        <div class="resume-preview">
+            <div class="resume-mock">
+                <div class="rm-header"></div>
+                <div class="rm-line w80"></div>
+                <div class="rm-line w60"></div>
+                <div class="rm-divider"></div>
+                <div class="rm-line w90"></div>
+                <div class="rm-line w70"></div>
+                <div class="rm-line w85"></div>
+                <div class="rm-divider"></div>
+                <div class="rm-line w75"></div>
+                <div class="rm-line w65"></div>
+                <div class="rm-line w80"></div>
+                <div class="rm-line w55"></div>
+                <i class='bx bx-file-blank resume-icon'></i>
+            </div>
+        </div>
+        <div class="resume-info">
+            <h3>Vikash Kumar Singh</h3>
+            <p class="resume-role">AI Engineer · Data Scientist</p>
+            <p class="resume-desc">Full resume covering professional experience at Rubixe AI Solutions, 4 ML/AI projects, technical skills in LLMs, RAG, deep learning, and B.Tech education with 8.2 CGPA.</p>
+            <div class="resume-dl-area">
+                <a href="Vikash_Analyst(1).pdf" download="Vikash_Analyst(1).pdf"
+                   class="btn btn-primary btn-lg resume-dl-btn" id="section-dl-btn"
+                   onclick="trackDownload('resume-section')">
+                    <i class='bx bx-download'></i> Download Resume (PDF)
+                </a>
+                <p class="resume-dl-note"><i class='bx bx-info-circle'></i> PDF · Vikash_Kumar_Singh_Resume.pdf</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ============ CONTACT ============ -->
+<section class="contact" id="contact">
+    <div class="section-tag">07 / Contact</div>
+    <h2 class="heading">Get In <span>Touch</span></h2>
+    <div class="contact-grid">
+
+        <div class="contact-left">
+            <p class="contact-intro">I'm currently <strong>open to new opportunities</strong> in AI/ML engineering, data science, and GenAI development. Whether you have a question or just want to say hi, my inbox is always open!</p>
+
+            <div class="contact-cards">
+                <a href="mailto:vks8405074264@gmail.com" class="contact-card">
+                    <i class='bx bx-envelope'></i>
+                    <div><strong>Email</strong><span>vks8405074264@gmail.com</span></div>
+                </a>
+                <a href="tel:+918207361585" class="contact-card">
+                    <i class='bx bx-phone'></i>
+                    <div><strong>Phone</strong><span>+91 8207361585</span></div>
+                </a>
+                <div class="contact-card no-link">
+                    <i class='bx bx-map-pin'></i>
+                    <div><strong>Location</strong><span>Bengaluru, India</span></div>
+                </div>
+                <a href="https://www.linkedin.com/in/vikash-kumar-singh-39012318b" target="_blank" class="contact-card">
+                    <i class='bx bxl-linkedin'></i>
+                    <div><strong>LinkedIn</strong><span>vikash-kumar-singh</span></div>
+                </a>
+                <a href="https://github.com/VikashCDS" target="_blank" class="contact-card">
+                    <i class='bx bxl-github'></i>
+                    <div><strong>GitHub</strong><span>VikashCDS</span></div>
+                </a>
+            </div>
+        </div>
+
+        <div class="contact-right">
+            <div id="form-messages" aria-live="polite"></div>
+            <form id="contact-form" action="https://formspree.io/f/mjkeqpwy" method="POST" class="contact-form">
+                <h3>Send a Message</h3>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Your Name</label>
+                        <input type="text" name="name" placeholder="John Doe" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Your Email</label>
+                        <input type="email" name="_replyto" placeholder="john@example.com" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Subject</label>
+                    <input type="text" name="subject" placeholder="Job Opportunity / Collaboration">
+                </div>
+                <div class="form-group">
+                    <label>Message</label>
+                    <textarea name="message" rows="5" placeholder="Tell me about the opportunity..." required></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">
+                    <i class='bx bx-send'></i> Send Message
+                </button>
+            </form>
+        </div>
+    </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer class="footer">
+    <div class="footer-inner">
+        <div class="footer-brand">
+            <span class="logo-bracket">&lt;</span>VKS<span class="logo-bracket">/&gt;</span>
+        </div>
+        <p>Built with ❤️ by Vikash Singh · AI Engineer &amp; Data Scientist</p>
+        <div class="footer-links">
+            <a href="https://github.com/VikashCDS" target="_blank"><i class='bx bxl-github'></i></a>
+            <a href="https://www.linkedin.com/in/vikash-kumar-singh-39012318b" target="_blank"><i class='bx bxl-linkedin'></i></a>
+            <a href="mailto:vks8405074264@gmail.com"><i class='bx bx-envelope'></i></a>
+        </div>
+    </div>
+</footer>
+
+<script src="main.js"></script>
+</body>
+</html>
