@@ -3,16 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vikash Kumar Singh | AI Engineer & Data Scientist</title>
-    <meta name="description" content="AI Engineer & Data Scientist specializing in LLM pipelines, RAG architectures, and end-to-end ML systems.">
+    <title>Vikash Kumar Singh | Machine Learning Engineer @ Trinity Mobility</title>
+    <meta name="description" content="Machine Learning Engineer at Trinity Mobility Pvt. Ltd., specializing in LLM pipelines, RAG architectures, and end-to-end ML systems.">
     <link rel="stylesheet" href="style.css">
     <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <script>document.documentElement.classList.add('js');</script>
 </head>
 <body>
 
+<!-- ============ SCROLL PROGRESS BAR ============ -->
+<div class="scroll-progress" id="scroll-progress"></div>
+
 <!-- ============ NEURAL NETWORK CANVAS BACKGROUND ============ -->
 <canvas id="neural-bg"></canvas>
+
+<!-- ============ ANIMATED GRADIENT MESH BACKGROUND ============ -->
+<div id="mesh-bg" class="mesh-bg" aria-hidden="true">
+    <span class="mesh-blob mb-1"></span>
+    <span class="mesh-blob mb-2"></span>
+    <span class="mesh-blob mb-3"></span>
+    <span class="mesh-blob mb-4"></span>
+</div>
+
+<!-- ============ BACKGROUND STYLE TOGGLE ============ -->
+<button id="bg-toggle" class="bg-toggle" aria-label="Switch background style" title="Switch background style">
+    <i class='bx bx-planet'></i>
+</button>
+
+<!-- ============ BACK TO TOP ============ -->
+<button id="back-to-top" class="back-to-top" aria-label="Back to top">
+    <i class='bx bx-up-arrow-alt'></i>
+</button>
 
 <!-- ============ DOWNLOAD NOTIFICATION ============ -->
 <div id="dl-toast" class="dl-toast" aria-live="polite">
@@ -20,6 +42,17 @@
     <span id="dl-toast-msg">Someone just downloaded your resume!</span>
     <button onclick="document.getElementById('dl-toast').classList.remove('show')" aria-label="Close">×</button>
 </div>
+
+<!-- ============ KONAMI CODE EASTER EGG TOAST ============ -->
+<div id="konami-toast" class="konami-toast" aria-live="polite">
+    <i class='bx bx-medal'></i>
+    <div class="konami-text">
+        <strong>Secret Unlocked: AI Whisperer 🏆</strong>
+        <span>You found the Konami code. Respect.</span>
+    </div>
+    <button onclick="document.getElementById('konami-toast').classList.remove('show')" aria-label="Close">×</button>
+</div>
+<canvas id="konami-confetti"></canvas>
 
 <!-- ============ HEADER ============ -->
 <header class="header" id="header">
@@ -42,20 +75,21 @@
 <!-- ============ HOME ============ -->
 <section class="home" id="home">
     <div class="home-content">
-        <div class="greeting-badge"><span class="dot-pulse"></span> Available for Opportunities</div>
+        <div class="greeting-badge"><span class="dot-pulse"></span> Machine Learning Engineer @ Trinity Mobility</div>
         <h1>Hi, I'm <span class="name-highlight">Vikash Kumar Singh</span></h1>
         <div class="typewriter-wrap">
             <span class="tw-prefix">I build </span>
             <span class="typewriter" id="typewriter"></span>
         </div>
         <p class="hero-desc">
-            AI Engineer and Data Scientist with hands-on experience in LLM pipelines, RAG architectures, 
-            and end-to-end ML systems. Turning complex data problems into measurable business impact.
+            Currently working as a <strong>Machine Learning Engineer at Trinity Mobility Pvt. Ltd.</strong>, 
+            with hands-on experience in LLM pipelines, RAG architectures, and end-to-end ML systems. 
+            Turning complex data problems into measurable business impact.
         </p>
         <div class="hero-stats">
-            <div class="stat-pill"><span>15%</span> Model accuracy boost</div>
-            <div class="stat-pill"><span>40%</span> Data augmentation</div>
-            <div class="stat-pill"><span>90%+</span> NLP accuracy</div>
+            <div class="stat-pill"><span class="count-up" data-target="15" data-suffix="%">0%</span> Model accuracy boost</div>
+            <div class="stat-pill"><span class="count-up" data-target="40" data-suffix="%">0%</span> Data augmentation</div>
+            <div class="stat-pill"><span class="count-up" data-target="90" data-suffix="%+">0%</span> NLP accuracy</div>
         </div>
         <div class="btn-box">
             <a href="#projects" class="btn btn-primary"><i class='bx bx-code-block'></i> View Projects</a>
@@ -108,13 +142,14 @@
         <div class="about-content">
             <h3>AI Engineer &amp; <span>Data Scientist</span></h3>
             <p>
-                I'm a passionate AI Engineer and Data Scientist based in Bengaluru, India, with deep expertise in 
+                I'm a passionate AI Engineer and Data Scientist based in Bengaluru, India, currently working as a 
+                <strong>Machine Learning Engineer at Trinity Mobility Pvt. Ltd.</strong>, with deep expertise in 
                 building LLM-powered pipelines, RAG architectures, and end-to-end ML systems. My toolkit spans 
                 LangChain, Python, TensorFlow, Scikit-learn, and Vector Databases, and I thrive at translating 
                 complex business problems into scalable, data-driven solutions.
             </p>
             <p>
-                Currently open to exciting opportunities in AI/ML engineering, data science, and GenAI product 
+                Always open to new opportunities and collaborations in AI/ML engineering, data science, and GenAI product 
                 development. I believe great AI is built at the intersection of strong mathematics, clean engineering, 
                 and deep domain understanding.
             </p>
@@ -151,6 +186,28 @@
     <div class="section-tag">02 / Experience</div>
     <h2 class="heading">Work <span>Experience</span></h2>
     <div class="timeline">
+
+        <div class="timeline-item current" data-aos>
+            <div class="timeline-dot"><i class='bx bx-chip'></i></div>
+            <div class="timeline-card">
+                <div class="tc-header">
+                    <div>
+                        <h3>Machine Learning Engineer <span class="tc-current-badge">Current</span></h3>
+                        <p class="tc-company"><i class='bx bx-buildings'></i> Trinity Mobility Pvt. Ltd.</p>
+                        <p class="tc-meta"><i class='bx bx-map-pin'></i> Bengaluru, Karnataka, India</p>
+                    </div>
+                    <span class="tc-date">Mar 2026 – Present</span>
+                </div>
+                <ul class="tc-bullets">
+                    <li>Building and maintaining production ML pipelines, working across data preprocessing, model training, and deployment for mobility-focused AI products.</li>
+                    <li>Applying LLM and GenAI techniques (LangChain, RAG) alongside classical ML to solve real-world business problems.</li>
+                    <li>Collaborating cross-functionally with product and engineering teams to ship reliable, scalable machine learning solutions.</li>
+                </ul>
+                <div class="tc-tags">
+                    <span>Machine Learning</span><span>Python</span><span>LLM</span><span>RAG</span><span>MLOps</span>
+                </div>
+            </div>
+        </div>
 
         <div class="timeline-item" data-aos>
             <div class="timeline-dot"><i class='bx bx-bot'></i></div>
@@ -237,9 +294,17 @@
 <section class="projects" id="projects">
     <div class="section-tag">03 / Projects</div>
     <h2 class="heading">Featured <span>Projects</span></h2>
+
+    <div class="project-filters" id="project-filters">
+        <button class="filter-btn active" data-filter="all">All</button>
+        <button class="filter-btn" data-filter="genai">GenAI · NLP</button>
+        <button class="filter-btn" data-filter="ml">ML</button>
+        <button class="filter-btn" data-filter="cv">Computer Vision</button>
+    </div>
+
     <div class="projects-grid">
 
-        <div class="project-card featured" data-aos>
+        <div class="project-card featured" data-aos data-category="genai">
             <div class="pc-accent"></div>
             <div class="pc-icon"><i class='bx bx-chat'></i></div>
             <div class="pc-category">GenAI · NLP</div>
@@ -251,7 +316,7 @@
             <a href="https://github.com/VikashCDS/RAG-Based-Question-Answering-System" target="_blank" class="pc-link"><i class='bx bxl-github'></i> View on GitHub</a>
         </div>
 
-        <div class="project-card" data-aos>
+        <div class="project-card" data-aos data-category="genai">
             <div class="pc-accent"></div>
             <div class="pc-icon"><i class='bx bx-analyse'></i></div>
             <div class="pc-category">NLP · Deep Learning</div>
@@ -263,7 +328,7 @@
             <a href="https://github.com/VikashCDS/Multi-Task-NLP-Content-Classifier" target="_blank" class="pc-link"><i class='bx bxl-github'></i> View on GitHub</a>
         </div>
 
-        <div class="project-card" data-aos>
+        <div class="project-card" data-aos data-category="ml">
             <div class="pc-accent"></div>
             <div class="pc-icon"><i class='bx bx-trending-up'></i></div>
             <div class="pc-category">ML · FinTech</div>
@@ -275,7 +340,7 @@
             <a href="https://github.com/VikashCDS/Bank-GoodCredit" target="_blank" class="pc-link"><i class='bx bxl-github'></i> View on GitHub</a>
         </div>
 
-        <div class="project-card" data-aos>
+        <div class="project-card" data-aos data-category="cv">
             <div class="pc-accent"></div>
             <div class="pc-icon"><i class='bx bx-camera'></i></div>
             <div class="pc-category">Computer Vision · HCI</div>
@@ -287,6 +352,21 @@
             <a href="https://github.com/VikashCDS/Gesture-Volume-Control" target="_blank" class="pc-link"><i class='bx bxl-github'></i> View on GitHub</a>
         </div>
 
+    </div>
+
+    <!-- ============ LIVE GITHUB STATS ============ -->
+    <div class="github-stats" id="github-stats" data-aos>
+        <div class="gh-stats-header">
+            <i class='bx bxl-github'></i>
+            <span>Live GitHub Activity <span class="gh-live-dot"></span></span>
+        </div>
+        <div class="gh-stats-grid" id="gh-stats-grid">
+            <div class="gh-stat-card"><span class="gh-stat-value" id="gh-repos">–</span><span class="gh-stat-label">Public Repos</span></div>
+            <div class="gh-stat-card"><span class="gh-stat-value" id="gh-followers">–</span><span class="gh-stat-label">Followers</span></div>
+            <div class="gh-stat-card"><span class="gh-stat-value" id="gh-following">–</span><span class="gh-stat-label">Following</span></div>
+            <div class="gh-stat-card"><span class="gh-stat-value" id="gh-gists">–</span><span class="gh-stat-label">Gists</span></div>
+        </div>
+        <p class="gh-stats-note" id="gh-stats-note"><i class='bx bx-loader-alt bx-spin'></i> Fetching live data from GitHub...</p>
     </div>
 </section>
 
