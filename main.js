@@ -194,6 +194,284 @@ function showToast(message) {
     setTimeout(function () { toast.classList.remove('show'); }, 6000);
 }
 
+// ===================== SECTION TRANSITION ANIMATIONS =====================
+(function () {
+    var sections = document.querySelectorAll('section:not(.home)');
+    if (!sections.length) return;
+
+    var observer = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('section-in-view');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
+
+    sections.forEach(function (s) { observer.observe(s); });
+})();
+
+// ===================== ANIMATED GRADIENT MESH BACKGROUND TOGGLE =====================
+(function () {
+    var toggleBtn = document.getElementById('bg-toggle');
+    var meshBg    = document.getElementById('mesh-bg');
+    var neuralBg  = document.getElementById('neural-bg');
+    if (!toggleBtn || !meshBg || !neuralBg) return;
+
+    var STORAGE_KEY = 'vks-bg-mode';
+
+    function applyMode(mode) {
+        if (mode === 'mesh') {
+            meshBg.classList.add('active');
+            neuralBg.style.opacity = '0';
+            toggleBtn.querySelector('i').className = 'bx bx-network-chart';
+            toggleBtn.setAttribute('title', 'Switch to neural network background');
+        } else {
+            meshBg.classList.remove('active');
+            neuralBg.style.opacity = '';
+            toggleBtn.querySelector('i').className = 'bx bx-planet';
+            toggleBtn.setAttribute('title', 'Switch to gradient mesh background');
+        }
+    }
+
+    var saved = 'neural';
+    try { saved = window.localStorage.getItem(STORAGE_KEY) || 'neural'; } catch (e) {}
+    applyMode(saved);
+
+    toggleBtn.addEventListener('click', function () {
+        var current = meshBg.classList.contains('active') ? 'mesh' : 'neural';
+        var next     = current === 'mesh' ? 'neural' : 'mesh';
+        applyMode(next);
+        try { window.localStorage.setItem(STORAGE_KEY, next); } catch (e) {}
+    });
+})();
+
+// ===================== KONAMI CODE EASTER EGG =====================
+(function () {
+    var toast   = document.getElementById('konami-toast');
+    var confCvs = document.getElementById('konami-confetti');
+    if (!toast || !confCvs) return;
+
+    var sequence = ['ArrowUp','ArrowUp','ArrowDown','ArrowDown','ArrowLeft','ArrowRight','ArrowLeft','ArrowRight','b','a'];
+    var progress = 0;
+
+    function launchConfetti() {
+        var ctx = confCvs.getContext('2d');
+        var W = confCvs.width  = window.innerWidth;
+        var H = confCvs.height = window.innerHeight;
+        var colors = ['#00c8ff', '#7b5ea7', '#00ff9d', '#ffffff'];
+        var pieces = [];
+        var count  = 160;
+
+        for (var i = 0; i < count; i++) {
+            pieces.push({
+                x: Math.random() * W,
+                y: -20 - Math.random() * H * 0.5,
+                w: 6 + Math.random() * 6,
+                h: 8 + Math.random() * 10,
+                vx: (Math.random() - 0.5) * 3,
+                vy: 2 + Math.random() * 3,
+                rot: Math.random() * Math.PI * 2,
+                vrot: (Math.random() - 0.5) * 0.3,
+                color: colors[Math.floor(Math.random() * colors.length)]
+            });
+        }
+
+        confCvs.classList.add('active');
+        var start = Date.now();
+        var durationMs = 3200;
+
+        function frame() {
+            ctx.clearRect(0, 0, W, H);
+            var elapsed = Date.now() - start;
+            pieces.forEach(function (p) {
+                p.x   += p.vx;
+                p.y   += p.vy;
+                p.rot += p.vrot;
+                ctx.save();
+                ctx.translate(p.x, p.y);
+                ctx.rotate(p.rot);
+                ctx.fillStyle = p.color;
+                ctx.fillRect(-p.w / 2, -p.h / 2, p.w, p.h);
+                ctx.restore();
+            });
+
+            if (elapsed < durationMs) {
+                requestAnimationFrame(frame);
+            } else {
+                confCvs.classList.remove('active');
+                ctx.clearRect(0, 0, W, H);
+            }
+        }
+        requestAnimationFrame(frame);
+    }
+
+    function triggerEasterEgg() {
+        toast.classList.add('show');
+        launchConfetti();
+        setTimeout(function () { toast.classList.remove('show'); }, 6000);
+    }
+
+    document.addEventListener('keydown', function (e) {
+        var key = e.key;
+        var expected = sequence[progress];
+        if (key === expected || key.toLowerCase() === expected) {
+            progress++;
+            if (progress === sequence.length) {
+                progress = 0;
+                triggerEasterEgg();
+            }
+        } else {
+            progress = (key === sequence[0]) ? 1 : 0;
+        }
+    });
+})();
+
+// ===================== SCROLL PROGRESS BAR =====================
+(function () {
+    var bar = document.getElementById('scroll-progress');
+    if (!bar) return;
+
+    function update() {
+        var scrollTop    = window.scrollY;
+        var docHeight    = document.documentElement.scrollHeight - window.innerHeight;
+        var pct          = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+        bar.style.width  = pct + '%';
+    }
+    window.addEventListener('scroll', update, { passive: true });
+    window.addEventListener('resize', update);
+    update();
+})();
+
+// ===================== BACK TO TOP =====================
+(function () {
+    var btn = document.getElementById('back-to-top');
+    if (!btn) return;
+
+    window.addEventListener('scroll', function () {
+        if (window.scrollY > 500) btn.classList.add('show');
+        else btn.classList.remove('show');
+    }, { passive: true });
+
+    btn.addEventListener('click', function () {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+})();
+
+// ===================== ANIMATED STAT COUNTERS =====================
+(function () {
+    var counters = document.querySelectorAll('.count-up');
+    if (!counters.length) return;
+
+    function animateCounter(el) {
+        var target   = parseFloat(el.getAttribute('data-target')) || 0;
+        var suffix   = el.getAttribute('data-suffix') || '';
+        var duration = 1400;
+        var start    = null;
+
+        function step(timestamp) {
+            if (!start) start = timestamp;
+            var progress = Math.min((timestamp - start) / duration, 1);
+            var eased    = 1 - Math.pow(1 - progress, 3);
+            var value    = Math.round(eased * target);
+            el.textContent = value + suffix;
+            if (progress < 1) requestAnimationFrame(step);
+        }
+        requestAnimationFrame(step);
+    }
+
+    var observer = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+                animateCounter(entry.target);
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.5 });
+
+    counters.forEach(function (el) { observer.observe(el); });
+})();
+
+// ===================== PROJECT FILTERS =====================
+(function () {
+    var filterBar = document.getElementById('project-filters');
+    if (!filterBar) return;
+    var buttons = filterBar.querySelectorAll('.filter-btn');
+    var cards   = document.querySelectorAll('.project-card');
+
+    buttons.forEach(function (btn) {
+        btn.addEventListener('click', function () {
+            buttons.forEach(function (b) { b.classList.remove('active'); });
+            btn.classList.add('active');
+            var filter = btn.getAttribute('data-filter');
+
+            cards.forEach(function (card) {
+                var category = card.getAttribute('data-category');
+                if (filter === 'all' || category === filter) {
+                    card.classList.remove('filtered-out');
+                } else {
+                    card.classList.add('filtered-out');
+                }
+            });
+        });
+    });
+})();
+
+// ===================== LIVE GITHUB STATS =====================
+(function () {
+    var grid = document.getElementById('gh-stats-grid');
+    var note = document.getElementById('gh-stats-note');
+    if (!grid || !note) return;
+
+    var GH_USERNAME = 'VikashCDS';
+    var loaded = false;
+
+    function animateValue(el, target) {
+        var duration = 1200, start = null;
+        function step(ts) {
+            if (!start) start = ts;
+            var progress = Math.min((ts - start) / duration, 1);
+            el.textContent = Math.round(progress * target);
+            if (progress < 1) requestAnimationFrame(step);
+        }
+        requestAnimationFrame(step);
+    }
+
+    function loadStats() {
+        if (loaded) return;
+        loaded = true;
+
+        fetch('https://api.github.com/users/' + GH_USERNAME)
+            .then(function (res) {
+                if (!res.ok) throw new Error('GitHub API error: ' + res.status);
+                return res.json();
+            })
+            .then(function (data) {
+                animateValue(document.getElementById('gh-repos'), data.public_repos || 0);
+                animateValue(document.getElementById('gh-followers'), data.followers || 0);
+                animateValue(document.getElementById('gh-following'), data.following || 0);
+                animateValue(document.getElementById('gh-gists'), data.public_gists || 0);
+                note.innerHTML = '<i class="bx bx-check-circle"></i> Live data pulled directly from github.com/' + GH_USERNAME;
+            })
+            .catch(function () {
+                note.innerHTML = '<i class="bx bx-error-circle"></i> Could not fetch live GitHub data right now.';
+                note.classList.add('error');
+            });
+    }
+
+    var observer = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+                loadStats();
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.2 });
+
+    var target = document.getElementById('github-stats');
+    if (target) observer.observe(target);
+})();
+
 // ===================== CONTACT FORM =====================
 (function () {
     var form     = document.getElementById('contact-form');
