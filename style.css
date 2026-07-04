@@ -42,6 +42,108 @@ body { background: var(--bg); color: var(--text); font-family: var(--sans); over
     opacity: 0.35;
 }
 
+/* ===================== ANIMATED GRADIENT MESH BACKGROUND ===================== */
+.mesh-bg {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    overflow: hidden;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.8s ease, visibility 0.8s ease;
+    background: var(--bg);
+}
+.mesh-bg.active { opacity: 1; visibility: visible; }
+
+.mesh-blob {
+    position: absolute;
+    width: 42vw;
+    height: 42vw;
+    border-radius: 50%;
+    filter: blur(90px);
+    opacity: 0.55;
+    mix-blend-mode: screen;
+    will-change: transform;
+}
+.mb-1 { background: var(--accent);  top: -10%;  left: -8%;  animation: mesh-float-1 22s ease-in-out infinite; }
+.mb-2 { background: var(--accent2); top: 10%;   right: -12%; animation: mesh-float-2 26s ease-in-out infinite; }
+.mb-3 { background: var(--accent3); bottom: -14%; left: 12%; animation: mesh-float-3 24s ease-in-out infinite; }
+.mb-4 { background: var(--accent);  bottom: -8%;  right: 8%;  width: 32vw; height: 32vw; animation: mesh-float-4 20s ease-in-out infinite; }
+
+@keyframes mesh-float-1 {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    50%      { transform: translate(12vw, 8vh) scale(1.15); }
+}
+@keyframes mesh-float-2 {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    50%      { transform: translate(-10vw, 10vh) scale(1.1); }
+}
+@keyframes mesh-float-3 {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    50%      { transform: translate(8vw, -10vh) scale(1.2); }
+}
+@keyframes mesh-float-4 {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    50%      { transform: translate(-8vw, -6vh) scale(1.1); }
+}
+
+.bg-toggle {
+    position: fixed;
+    bottom: 15.5rem;
+    right: 2.4rem;
+    width: 50px; height: 50px;
+    border-radius: 50%;
+    background: var(--card);
+    border: 1px solid var(--border);
+    color: var(--accent);
+    font-size: 2.1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 900;
+    transition: border-color 0.25s, transform 0.3s, box-shadow 0.3s;
+}
+.bg-toggle:hover { border-color: var(--border-hov); transform: translateY(-3px) rotate(25deg); box-shadow: 0 8px 24px var(--glow-s); }
+
+/* ===================== SCROLL PROGRESS BAR ===================== */
+.scroll-progress {
+    position: fixed;
+    top: 0; left: 0;
+    height: 3px;
+    width: 0%;
+    background: linear-gradient(90deg, var(--accent), var(--accent3));
+    z-index: 1100;
+    transition: width 0.1s ease-out;
+    box-shadow: 0 0 12px var(--glow);
+}
+
+/* ===================== BACK TO TOP ===================== */
+.back-to-top {
+    position: fixed;
+    bottom: 9rem;
+    right: 2.4rem;
+    width: 50px; height: 50px;
+    border-radius: 50%;
+    background: var(--accent);
+    color: var(--bg);
+    border: none;
+    font-size: 2.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 900;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(20px);
+    transition: opacity 0.3s, transform 0.3s, visibility 0.3s, box-shadow 0.3s;
+    box-shadow: 0 4px 20px var(--glow);
+}
+.back-to-top.show { opacity: 1; visibility: visible; transform: translateY(0); }
+.back-to-top:hover { box-shadow: 0 8px 30px var(--glow); transform: translateY(-3px); }
+
 /* ===================== TYPOGRAPHY ===================== */
 h1, h2, h3 { font-family: var(--sans); }
 
@@ -123,6 +225,17 @@ section {
     position: relative;
     z-index: 1;
     padding: 10rem 7%;
+}
+
+/* Section-level scroll transitions (whole section fades/slides in as it enters view) */
+.js section:not(.home) {
+    opacity: 0;
+    transform: translateY(50px) scale(0.985);
+    transition: opacity 0.9s cubic-bezier(0.22,1,0.36,1), transform 0.9s cubic-bezier(0.22,1,0.36,1);
+}
+.js section:not(.home).section-in-view {
+    opacity: 1;
+    transform: translateY(0) scale(1);
 }
 
 /* ===================== HOME ===================== */
@@ -370,7 +483,7 @@ section {
 @keyframes badge-float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
 
 /* ===================== ABOUT ===================== */
-.about { background: var(--bg2); }
+.about { background: transparent; }
 
 .about-grid {
     display: grid;
@@ -447,7 +560,7 @@ section {
 .highlight-card span { font-size: 1.45rem; color: var(--text); font-weight: 600; }
 
 /* ===================== EXPERIENCE / TIMELINE ===================== */
-.experience { background: var(--bg); }
+.experience { background: transparent; }
 
 .timeline {
     max-width: 900px;
@@ -505,6 +618,27 @@ section {
     flex-wrap: wrap;
 }
 .tc-header h3 { font-size: 2rem; font-weight: 700; color: var(--text); margin-bottom: 0.4rem; }
+.tc-current-badge {
+    display: inline-block;
+    font-family: var(--mono);
+    font-size: 1.05rem;
+    font-weight: 600;
+    letter-spacing: 0.05rem;
+    color: var(--bg);
+    background: var(--accent3);
+    padding: 0.25rem 0.9rem;
+    border-radius: 999px;
+    margin-left: 0.8rem;
+    vertical-align: middle;
+    animation: current-pulse 2.4s ease-in-out infinite;
+}
+@keyframes current-pulse {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(0,255,157,0.45); }
+    50% { box-shadow: 0 0 0 6px rgba(0,255,157,0); }
+}
+.timeline-item.current .timeline-dot { border-color: var(--accent3); color: var(--accent3); box-shadow: 0 0 24px rgba(0,255,157,0.4); }
+.timeline-item.current .timeline-card { border-color: rgba(0,255,157,0.35); }
+.timeline-item.current .timeline-card:hover { border-color: var(--accent3); box-shadow: 0 8px 32px rgba(0,255,157,0.15); }
 .tc-company { font-size: 1.5rem; color: var(--accent); display: flex; align-items: center; gap: 0.5rem; }
 .tc-meta { font-size: 1.35rem; color: var(--text-dim); display: flex; align-items: center; gap: 0.5rem; margin-top: 0.2rem; }
 .tc-date {
@@ -549,7 +683,29 @@ section {
 }
 
 /* ===================== PROJECTS ===================== */
-.projects { background: var(--bg2); }
+.projects { background: transparent; }
+
+.project-filters {
+    display: flex;
+    justify-content: center;
+    gap: 1.2rem;
+    flex-wrap: wrap;
+    margin-bottom: 4rem;
+}
+.filter-btn {
+    background: var(--card);
+    border: 1px solid var(--border);
+    color: var(--text-dim);
+    font-family: var(--sans);
+    font-size: 1.4rem;
+    font-weight: 600;
+    padding: 0.9rem 2rem;
+    border-radius: 999px;
+    cursor: pointer;
+    transition: border-color 0.25s, color 0.25s, background 0.25s, transform 0.2s;
+}
+.filter-btn:hover { border-color: var(--border-hov); color: var(--accent); transform: translateY(-2px); }
+.filter-btn.active { background: var(--accent); color: var(--bg); border-color: var(--accent); }
 
 .projects-grid {
     display: grid;
@@ -571,6 +727,7 @@ section {
     transform: translateY(20px);
 }
 .project-card.visible { opacity: 1; transform: translateY(0); }
+.project-card.filtered-out { display: none !important; }
 .project-card:hover { border-color: var(--border-hov); transform: translateY(-4px); box-shadow: 0 16px 48px rgba(0,0,0,0.5); }
 
 .project-card.featured {
@@ -647,8 +804,75 @@ section {
 }
 .pc-link:hover { background: var(--glow-s); border-color: var(--accent); }
 
+/* ===================== LIVE GITHUB STATS ===================== */
+.github-stats {
+    max-width: 1000px;
+    margin: 6rem auto 0;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 3rem;
+    transition: border-color 0.3s;
+}
+.github-stats:hover { border-color: var(--border-hov); }
+
+.gh-stats-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    font-size: 1.9rem;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 2.4rem;
+}
+.gh-stats-header i { color: var(--accent); font-size: 2.4rem; }
+.gh-live-dot {
+    display: inline-block;
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--accent3);
+    margin-left: 0.6rem;
+    animation: dot-blink 1.4s ease-in-out infinite;
+    vertical-align: middle;
+}
+
+.gh-stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.6rem;
+}
+.gh-stat-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.6rem;
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 2rem 1rem;
+    transition: border-color 0.3s, transform 0.3s;
+}
+.gh-stat-card:hover { border-color: var(--accent); transform: translateY(-3px); }
+.gh-stat-value { font-family: var(--mono); font-size: 3rem; font-weight: 700; color: var(--accent); }
+.gh-stat-label { font-size: 1.3rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.05rem; }
+
+.gh-stats-note {
+    text-align: center;
+    font-size: 1.3rem;
+    color: var(--text-dim);
+    margin-top: 2rem;
+}
+.gh-stats-note i { color: var(--accent); margin-right: 0.4rem; }
+.gh-stats-note.error { color: #ff5f5f; }
+.gh-stats-note.error i { color: #ff5f5f; }
+
+@media (max-width: 768px) {
+    .gh-stats-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
 /* ===================== SKILLS ===================== */
-.skills { background: var(--bg); }
+.skills { background: transparent; }
 
 .skills-universe {
     max-width: 1100px;
@@ -698,7 +922,7 @@ section {
 .skill-chips.soft span:hover { color: var(--accent2); border-color: var(--accent2); background: rgba(123,94,167,0.1); }
 
 /* ===================== EDUCATION ===================== */
-.education { background: var(--bg2); }
+.education { background: transparent; }
 
 .edu-grid {
     display: grid;
@@ -780,7 +1004,7 @@ section {
 .cert-card span { font-size: 1.3rem; color: var(--text-dim); font-weight: 400; }
 
 /* ===================== RESUME SECTION ===================== */
-.resume-section { background: var(--bg); }
+.resume-section { background: transparent; }
 
 .resume-card {
     max-width: 900px;
@@ -834,7 +1058,7 @@ section {
 .resume-dl-note i { color: var(--accent); }
 
 /* ===================== CONTACT ===================== */
-.contact { background: var(--bg2); }
+.contact { background: transparent; }
 
 .contact-grid {
     display: grid;
@@ -976,6 +1200,55 @@ a.contact-card:hover { border-color: var(--border-hov); transform: translateX(4p
 }
 .dl-toast button:hover { color: var(--text); }
 
+/* ===================== KONAMI EASTER EGG ===================== */
+.konami-toast {
+    position: fixed;
+    top: 2.4rem;
+    left: 50%;
+    transform: translate(-50%, -120px);
+    background: var(--card);
+    border: 1px solid var(--accent3);
+    border-radius: var(--radius);
+    padding: 1.6rem 2.2rem;
+    display: flex;
+    align-items: center;
+    gap: 1.4rem;
+    font-size: 1.4rem;
+    color: var(--text);
+    box-shadow: 0 8px 40px rgba(0,255,157,0.25);
+    z-index: 10000;
+    opacity: 0;
+    transition: transform 0.5s cubic-bezier(0.34,1.56,0.64,1), opacity 0.5s;
+    max-width: 420px;
+}
+.konami-toast.show { transform: translate(-50%, 0); opacity: 1; }
+.konami-toast i { font-size: 3rem; color: var(--accent3); flex-shrink: 0; }
+.konami-text { display: flex; flex-direction: column; gap: 0.2rem; }
+.konami-text strong { font-size: 1.6rem; color: var(--accent3); }
+.konami-text span { color: var(--text-dim); }
+.konami-toast button {
+    margin-left: auto;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 2rem;
+    color: var(--text-dim);
+    line-height: 1;
+    padding: 0 0.4rem;
+    flex-shrink: 0;
+}
+.konami-toast button:hover { color: var(--text); }
+
+#konami-confetti {
+    position: fixed;
+    inset: 0;
+    z-index: 9998;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.6s ease;
+}
+#konami-confetti.active { opacity: 1; }
+
 /* ===================== RESPONSIVE ===================== */
 @media (max-width: 1024px) {
     .home { flex-direction: column; text-align: center; padding-top: 10rem; gap: 5rem; justify-content: center; min-height: 100vh; }
@@ -1019,6 +1292,10 @@ a.contact-card:hover { border-color: var(--border-hov); transform: translateX(4p
     .edu-grid { grid-template-columns: 1fr; }
     .projects-grid { grid-template-columns: 1fr; }
     section { padding: 8rem 5%; }
+    .back-to-top, .bg-toggle { width: 42px; height: 42px; font-size: 1.8rem; right: 1.6rem; }
+    .back-to-top { bottom: 7.5rem; }
+    .bg-toggle { bottom: 13rem; }
+    .dl-toast, .konami-toast { max-width: calc(100vw - 3.2rem); }
 }
 
 @media (max-width: 480px) {
